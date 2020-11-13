@@ -1,0 +1,48 @@
+{
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "info": {
+    "title": "TEMPLATE",
+    "version": "",
+    "description": "**TEMPLATE, the great**  \n    \n  Download source openapi.json: [local](http://localhost:TEMP_PORT/service/NAME_SUFFIX/openapi.json)\n    \n  **Enjoy!**"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController.healthCheck",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Health check",
+        "tags": ["Health"]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:TEMP_PORT/NAME_SUFFIX",
+      "description": "localhost"
+    },
+    {
+      "url": "https://service.dev.pipt.com/NAME_SUFFIX",
+      "description": "development server"
+    },
+    {
+      "url": "https://service.staging.pipt.com/service/NAME_SUFFIX",
+      "description": "staging server"
+    }
+  ]
+}

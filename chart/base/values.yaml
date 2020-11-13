@@ -1,0 +1,40 @@
+# Default values for template-node-typescript.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global: {}
+
+logLevel: "debug"
+expressLogLevel: "warn"
+
+image:
+  repository: replace
+  tag: replace
+  pullPolicy: Always
+  port: 3000
+  secretName: "uk-icr-io"
+
+nameOverride: ""
+fullnameOverride: ""
+
+resources:
+  requests:
+    cpu: 50m
+
+service:
+  type: ClusterIP
+  port: 80
+
+route:
+  enabled: true
+  path: "/NAME_SUFFIX"
+  redactedNamespace: prod
+  ipAllowList: >-
+    173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22
+    141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20
+    197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/12
+    172.64.0.0/13 131.0.72.0/22
+
+ingress:
+  enabled: false
+
+resourceGroupName: pipt2

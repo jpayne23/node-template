@@ -1,0 +1,11 @@
+.helm/
+.idea/
+.scannerwork/
+.secrets
+*.iml
+coverage/
+dist/
+logs/
+node_modules/
+pipeline-build-config.json
+test-report.xml

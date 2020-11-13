@@ -1,0 +1,21 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist",
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "declaration": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es6",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es6", "dom"]
+  },
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "src/**/*.spec.ts"]
+}

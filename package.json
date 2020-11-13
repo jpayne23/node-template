@@ -1,0 +1,86 @@
+{
+  "name": "TEMPLATE",
+  "version": "1.0.0",
+  "org": "pipt",
+  "description": "TEMPLATE, the great",
+  "main": "index.js",
+  "config": {
+    "ROUTE_PREFIX": "/NAME_SUFFIX",
+    "DEFAULT_PORT": "TEMP_PORT"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "dev": "npm run openapi && nodemon | pino-pretty",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "prebuild": "npm run clean && npm run openapi",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "openapi": "ts-node src/util/openapi",
+    "start": "npm run serve",
+    "serve": "node dist/src | pino-logdna-formatter",
+    "ts:check": "tsc --skipLibCheck --noEmit",
+    "validate": "concurrently --kill-others-on-fail npm:ts:check npm:test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
+    "cors": "^2.8.5",
+    "express-pino-logger": "^4.0.0",
+    "helmet": "^4.1.1",
+    "ibm-cos-sdk": "^1.6.1",
+    "ibmcloud-appid": "^6.1.0",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.19",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pino": "^5.16.0",
+    "pino-logdna-formatter": "^1.2.0",
+    "prom-client": "^12.0.0",
+    "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.9.0-alpha.4",
+    "routing-controllers-openapi": "^2.0.1",
+    "rxjs": "^6.5.2",
+    "swagger-ui-express": "^4.1.4",
+    "tslib": "^1.10.0",
+    "typedi": "^0.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.17.0",
+    "@types/jest": "^24.0.11",
+    "@types/jest-plugin-context": "^2.9.2",
+    "@types/node": "^11.15.10",
+    "@types/pino": "^5.15.3",
+    "@types/yargs": "^13.0.0",
+    "babel-jest": "^24.7.1",
+    "concurrently": "^5.2.0",
+    "husky": "4.2.3",
+    "jest": "^24.7.1",
+    "jest-plugin-context": "^2.9.0",
+    "jest-sonar-reporter": "^2.0.0",
+    "nodemon": "^2.0.4",
+    "npm-check": "^5.9.2",
+    "pino-pretty": "^3.5.0",
+    "rimraf": "^2.6.3",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.2",
+    "ts-json-schema-generator": "^0.70.2",
+    "ts-node": "^8.1.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.4",
+    "yargs": "^13.2.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run validate"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://eu-gb.git.cloud.ibm.com/pipt/TEMPLATE"
+  }
+}
