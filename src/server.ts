@@ -9,7 +9,7 @@ import http = require("http");
 import * as openapi from "../openapi.json";
 import * as packageJSON from "../package.json";
 import { LoggerApi } from "./logger";
-import { getAppIdCredentials } from "./util/appIdCreds";
+
 import helmet from "helmet";
 
 const { ROUTE_PREFIX, DEFAULT_PORT } = packageJSON.config;
