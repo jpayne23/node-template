@@ -14,7 +14,7 @@ import helmet from "helmet";
 
 const { ROUTE_PREFIX, DEFAULT_PORT } = packageJSON.config;
 
-const passport = require("passport");
+// const passport = require("passport");
 const Prometheus = require("prom-client");
 
 // --------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ export class ApiServer {
     // passport.use(new APIStrategy({ oauthServerUrl: getAppIdCredentials().oauthUrl }));
 
     // Initialise AppID middleware
-    this.app.use(passport.initialize());
+    // this.app.use(passport.initialize());
 
     // Secure all endpoints behind AppID except /health and /yourPublicEndpoint (to be adapted)
     // this.app.use(
@@ -116,27 +116,27 @@ export class ApiServer {
       cors: true,
       controllers: controllers,
       routePrefix: ROUTE_PREFIX,
-      currentUserChecker: async (action: Action) => {
-        const token = action.request.headers["authorization"];
-        return token;
-      },
-      authorizationChecker: async (action: Action, roles: string[]) => {
-        const token = action.request.headers["authorization"];
-        if (!token) {
-          return false;
-        }
-        if (!roles || roles.length === 0) {
-          return true;
-        }
-        const userData = jwtDecode(token);
+      // currentUserChecker: async (action: Action) => {
+      //   const token = action.request.headers["authorization"];
+      //   return token;
+      // },
+      // authorizationChecker: async (action: Action, roles: string[]) => {
+      //   const token = action.request.headers["authorization"];
+      //   if (!token) {
+      //     return false;
+      //   }
+      //   if (!roles || roles.length === 0) {
+      //     return true;
+      //   }
+      //   const userData = jwtDecode(token);
 
-        //user roles and controller roles has at least one match
-        if (userData.roles.some((r) => roles.indexOf(r) >= 0)) {
-          return true;
-        }
+      //   //user roles and controller roles has at least one match
+      //   if (userData.roles.some((r) => roles.indexOf(r) >= 0)) {
+      //     return true;
+      //   }
 
-        return false;
-      },
+      //   return false;
+      // },
     });
 
     // Prometheus: HttpRequestDurationMicroseconds
