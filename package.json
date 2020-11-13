@@ -5,7 +5,7 @@
   "description": "A node template",
   "main": "index.js",
   "config": {
-    "ROUTE_PREFIX": "/",
+    "ROUTE_PREFIX": "/template",
     "DEFAULT_PORT": "3000"
   },
   "scripts": {
