@@ -15,7 +15,6 @@ import helmet from "helmet";
 const { ROUTE_PREFIX, DEFAULT_PORT } = packageJSON.config;
 
 const passport = require("passport");
-const APIStrategy = require("ibmcloud-appid").APIStrategy;
 const Prometheus = require("prom-client");
 
 // --------------------------------------------------------------------------------
@@ -26,11 +25,11 @@ const Prometheus = require("prom-client");
 const collectDefaultMetrics = Prometheus.collectDefaultMetrics;
 
 // define a custom prefix string for application metrics
-collectDefaultMetrics({ prefix: "pipt_" });
+collectDefaultMetrics({ prefix: "node_" });
 
 // define a histogram to measure total request duration
 const httpRequestDurationMicroseconds = new Prometheus.Histogram({
-  name: "pipt_http_request_duration_ms",
+  name: "node_http_request_duration_ms",
   help: "Duration of HTTP requests in ms",
   labelNames: ["method", "code", "url"],
   buckets: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000], // buckets for response time from 0.1ms to 500ms
@@ -93,26 +92,20 @@ export class ApiServer {
       });
 
       // serve swagger-ui
-      this.app.use(
-        ROUTE_PREFIX + "/api-docs",
-        swaggerUi.serve,
-        swaggerUi.setup(this.apiSpec)
-      );
+      this.app.use(ROUTE_PREFIX + "/api-docs", swaggerUi.serve, swaggerUi.setup(this.apiSpec));
     }
 
     // Initialise AppID Passport strategy
-    passport.use(
-      new APIStrategy({ oauthServerUrl: getAppIdCredentials().oauthUrl })
-    );
+    // passport.use(new APIStrategy({ oauthServerUrl: getAppIdCredentials().oauthUrl }));
 
     // Initialise AppID middleware
     this.app.use(passport.initialize());
 
     // Secure all endpoints behind AppID except /health and /yourPublicEndpoint (to be adapted)
-    this.app.use(
-      /^((?!(health|yourPublicEndpoint)).)*$/,
-      passport.authenticate(APIStrategy.STRATEGY_NAME, { session: false })
-    );
+    // this.app.use(
+    //   /^((?!(health|yourPublicEndpoint)).)*$/,
+    //   passport.authenticate(APIStrategy.STRATEGY_NAME, { session: false })
+    // );
 
     this.app.get(ROUTE_PREFIX + "/metrics", (req, res) => {
       res.set("Content-Type", Prometheus.register.contentType);
@@ -151,9 +144,7 @@ export class ApiServer {
     this.app.use((req, res, next) => {
       const responseTimeInMs = Date.now() - res.locals.startEpoch;
 
-      httpRequestDurationMicroseconds
-        .labels(req.method, res.statusCode, req.route.path)
-        .observe(responseTimeInMs);
+      httpRequestDurationMicroseconds.labels(req.method, res.statusCode, req.route.path).observe(responseTimeInMs);
 
       next();
     });
@@ -168,17 +159,12 @@ export class ApiServer {
       this.server = this.app
         .listen(this.PORT, () => {
           const addressInfo = this.server!.address() as AddressInfo;
-          const address =
-            addressInfo.address === "::" ? "localhost" : addressInfo.address;
+          const address = addressInfo.address === "::" ? "localhost" : addressInfo.address;
 
-          this.logger.info(
-            `Listening to http://${address}:${addressInfo.port}${ROUTE_PREFIX}`
-          );
+          this.logger.info(`Listening to http://${address}:${addressInfo.port}${ROUTE_PREFIX}`);
 
           if (process.env.NODE_ENV !== "production") {
-            this.logger.info(
-              `OpenAPI spec at http://${address}:${addressInfo.port}${ROUTE_PREFIX}/api-docs`
-            );
+            this.logger.info(`OpenAPI spec at http://${address}:${addressInfo.port}${ROUTE_PREFIX}/api-docs`);
           }
           return resolve(this);
         })

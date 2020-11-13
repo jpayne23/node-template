@@ -11,7 +11,7 @@
   "info": {
     "title": "TEMPLATE",
     "version": "",
-    "description": "**TEMPLATE, the great**  \n    \n  Download source openapi.json: [local](http://localhost:TEMP_PORT/service/NAME_SUFFIX/openapi.json)\n    \n  **Enjoy!**"
+    "description": "**TEMPLATE, the great**  \n    \n  Download source openapi.json: [local](http://localhost:TEMP_PORT/NAME_SUFFIX/openapi.json)  \n    \n  **Enjoy!**"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -27,7 +27,9 @@
           }
         },
         "summary": "Health check",
-        "tags": ["Health"]
+        "tags": [
+          "Health"
+        ]
       }
     }
   },
@@ -35,14 +37,6 @@
     {
       "url": "http://localhost:TEMP_PORT/NAME_SUFFIX",
       "description": "localhost"
-    },
-    {
-      "url": "https://service.dev.pipt.com/NAME_SUFFIX",
-      "description": "development server"
-    },
-    {
-      "url": "https://service.staging.pipt.com/service/NAME_SUFFIX",
-      "description": "staging server"
     }
   ]
 }

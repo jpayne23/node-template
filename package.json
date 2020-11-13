@@ -1,12 +1,12 @@
 {
-  "name": "TEMPLATE",
+  "name": "node-template",
   "version": "1.0.0",
-  "org": "pipt",
-  "description": "TEMPLATE, the great",
+  "org": "jpayne23",
+  "description": "A node template",
   "main": "index.js",
   "config": {
-    "ROUTE_PREFIX": "/NAME_SUFFIX",
-    "DEFAULT_PORT": "TEMP_PORT"
+    "ROUTE_PREFIX": "/",
+    "DEFAULT_PORT": "3000"
   },
   "scripts": {
     "clean": "rimraf dist",
@@ -22,7 +22,7 @@
     "ts:check": "tsc --skipLibCheck --noEmit",
     "validate": "concurrently --kill-others-on-fail npm:ts:check npm:test"
   },
-  "author": "",
+  "author": "jpayne23",
   "license": "ISC",
   "dependencies": {
     "class-transformer": "^0.2.3",
@@ -30,8 +30,6 @@
     "cors": "^2.8.5",
     "express-pino-logger": "^4.0.0",
     "helmet": "^4.1.1",
-    "ibm-cos-sdk": "^1.6.1",
-    "ibmcloud-appid": "^6.1.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.19",
     "passport": "^0.4.1",
@@ -81,6 +79,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://eu-gb.git.cloud.ibm.com/pipt/TEMPLATE"
+    "url": "https://github.com/jpayne23/node-template.git"
   }
 }
