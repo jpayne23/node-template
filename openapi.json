@@ -9,9 +9,9 @@
     }
   },
   "info": {
-    "title": "TEMPLATE",
+    "title": "node-template",
     "version": "",
-    "description": "**TEMPLATE, the great**  \n    \n  Download source openapi.json: [local](http://localhost:TEMP_PORT/NAME_SUFFIX/openapi.json)  \n    \n  **Enjoy!**"
+    "description": "**A node template**  \n    \n  Download source openapi.json: [local](http://localhost:3000/template/openapi.json)  \n    \n  **Enjoy!**"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -31,11 +31,79 @@
           "Health"
         ]
       }
+    },
+    "/v1/things": {
+      "get": {
+        "operationId": "ThingController.getThings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Get things",
+        "tags": [
+          "Thing"
+        ]
+      },
+      "post": {
+        "operationId": "ThingController.postThing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          },
+          "description": "",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Post thing",
+        "tags": [
+          "Thing"
+        ]
+      }
+    },
+    "/v1/things/{id}": {
+      "get": {
+        "operationId": "ThingController.getThingById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Get thing by id",
+        "tags": [
+          "Thing"
+        ]
+      }
     }
   },
   "servers": [
     {
-      "url": "http://localhost:TEMP_PORT/NAME_SUFFIX",
+      "url": "http://localhost:3000/template",
       "description": "localhost"
     }
   ]
